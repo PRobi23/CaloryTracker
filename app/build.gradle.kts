@@ -8,8 +8,6 @@ plugins {
 android {
     compileSdk = ProjectConfig.compileSdk
 
-    namespace = ProjectConfig.appId
-
     defaultConfig {
         applicationId = ProjectConfig.appId
         minSdk = ProjectConfig.minSdk
