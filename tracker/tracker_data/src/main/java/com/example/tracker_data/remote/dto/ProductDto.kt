@@ -5,7 +5,7 @@ import com.squareup.moshi.Json
 data class ProductDto(
     @field:Json(name = "image_front_thumb_url")
     val imageFrontThumbUrl: String?,
-    val nutriments: Nutriments,
+    val nutriments: NutrimentsDto,
     @field:Json(name = "product_name")
     val productName: String?
 )
