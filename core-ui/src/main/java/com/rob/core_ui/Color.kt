@@ -1,4 +1,4 @@
-package com.rob.calorytracker.ui.theme
+package com.rob.core_ui
 
 import androidx.compose.ui.graphics.Color
 

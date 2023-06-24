@@ -1,4 +1,4 @@
-package com.example.tracker_presentation
+package com.example.tracker_presentation.tracker_overview
 
 import com.example.tracker_domain.model.TrackedFood
 import java.time.LocalDate

@@ -11,6 +11,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.tracker_presentation.tracker_overview.TrackerOverviewScreen
 import com.rob.calorytracker.ui.theme.CaloryTrackerTheme
 import com.rob.core.navigation.Route
 import com.rob.calorytracker.navigation.navigate
@@ -80,7 +81,9 @@ class MainActivity : ComponentActivity() {
                         }
 
                         composable(Route.TRACKER_OVERVIEW) {
-
+                            TrackerOverviewScreen(
+                                onNavigate = navController::navigate
+                            )
                         }
                         composable(Route.SEARCH) {
 
