@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalCoilApi::class)
+
 package com.example.tracker_presentation.tracker_overview
 
 import androidx.compose.foundation.layout.*
@@ -8,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
+import coil.annotation.ExperimentalCoilApi
 import com.example.tracker_presentation.tracker_overview.components.AddButton
 import com.example.tracker_presentation.tracker_overview.components.DaySelector
 import com.example.tracker_presentation.tracker_overview.components.ExpandableMeal
@@ -19,7 +22,7 @@ import com.rob.tracker_presentation.R
 
 @Composable
 fun TrackerOverviewScreen(
-    onNavigate: (UiEvent.Navigate) -> Unit,
+    onNavigateToSearch: (mealName: String, day: Int, month: Int, year: Int) -> Unit,
     viewModel: TrackerOverviewViewModel = hiltViewModel()
 ) {
     val spacing = LocalSpacing.current
@@ -77,8 +80,11 @@ fun TrackerOverviewScreen(
                                 meal.name.asString(context)
                             ),
                             onClick = {
-                                viewModel.onEvent(
-                                    TrackerOverviewEvent.OnAddFoodClick(meal)
+                                onNavigateToSearch(
+                                    meal.name.asString(context),
+                                    state.date.dayOfMonth,
+                                    state.date.monthValue,
+                                    state.date.year
                                 )
                             },
                             modifier = Modifier.fillMaxWidth()

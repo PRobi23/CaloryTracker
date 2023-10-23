@@ -22,7 +22,7 @@ import javax.inject.Inject
 class TrackerOverviewViewModel @Inject constructor(
     preferences: Preferences,
     private val trackerUseCases: TrackerUseCases,
-): ViewModel() {
+) : ViewModel() {
 
     var state by mutableStateOf(TrackerOverviewState())
         private set
@@ -37,42 +37,32 @@ class TrackerOverviewViewModel @Inject constructor(
     }
 
     fun onEvent(event: TrackerOverviewEvent) {
-        when(event) {
-            is TrackerOverviewEvent.OnAddFoodClick -> {
-                viewModelScope.launch {
-                    _uiEvent.send(
-                        UiEvent.Navigate(
-                            route = Route.SEARCH
-                                    + "/${event.meal.mealType.name}"
-                                    + "/${state.date.dayOfMonth}"
-                                    + "/${state.date.monthValue}"
-                                    + "/${state.date.year}"
-                        )
-                    )
-                }
-            }
+        when (event) {
             is TrackerOverviewEvent.OnDeleteTrackedFoodClick -> {
                 viewModelScope.launch {
                     trackerUseCases.deleteTrackedFood(event.trackedFood)
                     refreshFoods()
                 }
             }
+
             is TrackerOverviewEvent.OnNextDayClick -> {
                 state = state.copy(
                     date = state.date.plusDays(1)
                 )
                 refreshFoods()
             }
+
             is TrackerOverviewEvent.OnPreviousDayClick -> {
                 state = state.copy(
                     date = state.date.minusDays(1)
                 )
                 refreshFoods()
             }
+
             is TrackerOverviewEvent.OnToggleMealClick -> {
                 state = state.copy(
                     meals = state.meals.map {
-                        if(it.name == event.meal.name) {
+                        if (it.name == event.meal.name) {
                             it.copy(isExpanded = !it.isExpanded)
                         } else it
                     }

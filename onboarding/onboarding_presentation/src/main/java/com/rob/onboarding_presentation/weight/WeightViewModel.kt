@@ -19,7 +19,7 @@ import javax.inject.Inject
 @HiltViewModel
 class WeightViewModel @Inject constructor(
     private val preferences: Preferences,
-): ViewModel() {
+) : ViewModel() {
 
     var weight by mutableStateOf("80.0")
         private set
@@ -28,7 +28,7 @@ class WeightViewModel @Inject constructor(
     val uiEvent = _uiEvent.receiveAsFlow()
 
     fun onWeightEnter(weight: String) {
-        if(weight.length <= 5) {
+        if (weight.length <= 5) {
             this.weight = weight
         }
     }
@@ -44,7 +44,7 @@ class WeightViewModel @Inject constructor(
                 return@launch
             }
             preferences.saveWeight(weightNumber)
-            _uiEvent.send(UiEvent.Navigate(Route.ACTIVITY))
+            _uiEvent.send(UiEvent.Success)
         }
     }
 }
